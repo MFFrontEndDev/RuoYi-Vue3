@@ -156,8 +156,21 @@ export const dynamicRoutes = [
         name: 'GenEdit',
         meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
       }
+      ,{
+        path: '/tool/gen-edit/b',
+        component: () => import('@/views/tool/gen/b'),
+        name: '操作详情',
+        meta: { title: '操作详情' }
+      }
+      ,{
+        path: 'c',
+        component: () => import('@/views/tool/gen/c'),
+        name: 'c',
+        meta: { title: 'c' }
+      }
     ]
   }
+  
 ]
 
 const router = createRouter({

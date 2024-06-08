@@ -32,6 +32,8 @@
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+
+        <el-button type="primary" plain  @click="handleTestJump">测试跳转</el-button>
       </el-form-item>
     </el-form>
 
@@ -279,11 +281,13 @@ function handleSelectionChange(selection) {
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
-/** 修改按钮操作 */
+/** 修改按钮操作 changyou */
 function handleEditTable(row) {
+  // router.push({ path: "/tool/gen-edit/index3/", query: { rowId: 1 } });
   const tableId = row.tableId || ids.value[0];
   router.push({ path: "/tool/gen-edit/index/" + tableId, query: { pageNum: queryParams.value.pageNum } });
 }
+
 /** 删除按钮操作 */
 function handleDelete(row) {
   const tableIds = row.tableId || ids.value;
@@ -296,4 +300,16 @@ function handleDelete(row) {
 }
 
 getList();
+
+/** 测试跳转 changyou  */
+function handleTestJump(row) {
+  proxy.$router.push({
+        // path: '/operationDetails/index',
+        path: '/tool/gen-edit/b',
+        query: {
+            rowId: 1
+        }
+    });
+}
+
 </script>
