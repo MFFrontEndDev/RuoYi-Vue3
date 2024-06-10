@@ -15,7 +15,22 @@
         <p>{{ commit.message }}</p>
         <el-button type="primary" link @click="goToGitHub">查看详情</el-button>
       </div>
-    </el-popover>
+  </el-popover>
+
+  <el-select v-model="selectedOptions" multiple placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  <div class="selected-values">
+    <h3>选中的选项：</h3>
+    <ul>
+      <li v-for="option in selectedOptions" :key="option">{{ option }}</li>
+    </ul>
+  </div>
 </div>
 
 </template>
@@ -140,6 +155,38 @@ function resetQuery() {
         }
     });
 }
+
+const options = [
+  { value: 'option1', label: '选项1' },
+  { value: 'option2', label: '选项2' },
+  { value: 'option3', label: '选项3' },
+  { value: 'option4', label: '选项4' },
+  { value: 'option5', label: '选项5' },
+  { value: 'option6', label: '选项6' },
+  { value: 'option7', label: '选项7' },
+  { value: 'option8', label: '选项8' },
+  { value: 'option9', label: '选项9' }
+];
+const selectedOptions = ref([]);
+
+async function fetchApiData(selectedValues) {
+  try {
+    // 假设这是你的 API 端点
+    const response = await axios.post('/api/your-endpoint', {
+      selectedOptions: selectedValues
+    });
+    apiResults.value = response.data;
+  } catch (error) {
+    console.error('API 调用失败:', error);
+    apiResults.value = 'API 调用失败';
+  }
+}
+
+// 监听 selectedOptions 的变化
+watch(selectedOptions, (newVal) => {
+  console.log('selectedOptions newVal',newVal)
+  fetchApiData(newVal);
+});
 
 </script>
 
